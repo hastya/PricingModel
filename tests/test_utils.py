@@ -87,7 +87,7 @@ def save_to_resultstatic(create_tables, db_connection, calculate_price_per_unit)
 
     return _save_to_resultstatic
 
-# Фикстура для получения данных из таблицы resultstatic
+# Фикстура для получения данных из таблицы resultdata
 @pytest.fixture(scope="module")
 def get_result_from_db(db_connection):
     def _get_result_from_db():
@@ -100,7 +100,7 @@ def get_result_from_db(db_connection):
     return _get_result_from_db
 
 
-# Тест для загрузки данных из CSV в таблицу loadstatic
+# Тест для загрузки данных из CSV в таблицу loaddata
 def test_save_to_loadstatic(save_to_loadstatic):
     data = os.path.join('tests', 'test_data.csv')
     save_to_loadstatic(data) # Заменить "data.csv" на путь к CSV файлу с данными
@@ -120,7 +120,7 @@ def test_calculate_price_per_unit(calculate_price_per_unit):
     ]
     assert result == expected_result, "Неправильный результат расчета цены на единицу"
 
-# Тест для сохранения результата в таблицу resultstatic
+# Тест для сохранения результата в таблицу resultdata
 def test_save_to_resultstatic(save_to_resultstatic):
     save_to_resultstatic()
     # Проверка, что результат был успешно сохранен в таблицу
