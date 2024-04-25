@@ -3,16 +3,19 @@ import os
 
 import psycopg2
 import pytest
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Фикстура для подключения к базе данных PostgreSQL
 @pytest.fixture(scope="module")
 def db_connection():
     conn = psycopg2.connect(
-        database="postgres",
-        user="postgres",
-        password="sql",
-        host="localhost",
-        port="5432"
+        database=os.getenv('POSTGRES_DB'),
+        user=os.getenv('POSTGRES_USER'),
+        password=os.getenv('POSTGRES_PASSWORD'),
+        host=os.getenv('POSTGRES_HOST'),
+        port=os.getenv('POSTGRES_PORT')
     )
     yield conn
     conn.close()
